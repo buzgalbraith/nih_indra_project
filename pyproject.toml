@@ -1,0 +1,37 @@
+[project]
+name = "nih-project"
+version = "0.1.0"
+description = "Exploration using INDRA readers on non-PubMed data sources"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "indra>=1.24",
+    "indra-reading",
+    "pandas>=3.0",
+    "tqdm>=4.70",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "pyright",
+    "ruff",
+]
+
+[tool.uv]
+# scripts/ is a set of standalone scripts, not an installable package.
+package = false
+
+# indra_reading is vendored as a git clone under readers/ and installed editable.
+[tool.uv.sources]
+indra-reading = { path = "readers/indra_reading", editable = true }
+
+[tool.ruff]
+line-length = 88
+src = ["scripts"]
+
+[tool.pyright]
+include = ["scripts"]
+pythonVersion = "3.13"
+venvPath = "."
+venv = ".venv"
